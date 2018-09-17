@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 public class Control : NetworkBehaviour
 {
+	
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +26,19 @@ public class Control : NetworkBehaviour
 
     public override void OnStartLocalPlayer()
     {
-        GetComponent<MeshRenderer>().material.color = Color.blue;
+		if(NetworkServer.connections.Count == 0) {
+			GetComponent<MeshRenderer>().material.color = Color.blue;
+			transform.position = new Vector3(9, 1, 0);
+			Debug.Log(NetworkServer.connections.Count+1+" conectados cuando la cuenta esta en 0");
+		}
+		else
+		{
+			GetComponent<MeshRenderer>().material.color = Color.blue;
+			transform.position = new Vector3(-9, 1, 0);
+			Debug.Log(NetworkServer.connections.Count + 1 + " conectados");
+		}
+        
     }
+	
+	
 }
